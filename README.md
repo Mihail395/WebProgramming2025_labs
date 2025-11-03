@@ -1,1 +1,1 @@
-# VNP2025_labs
+# WebP lab exercises 2025
