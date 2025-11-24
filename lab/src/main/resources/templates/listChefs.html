@@ -20,7 +20,7 @@
 </header>
 <main>
     <h2>Choose a chef:</h2>
-    <form action="/dish" method="POST">
+    <form th:action="@{/dishes/add-to-chef}" method="get">
         <!-- Display radio buttons for each chef,
              the value should be the chef id
              and the displayed text should be:

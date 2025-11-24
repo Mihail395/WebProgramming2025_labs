@@ -37,10 +37,13 @@
 <body>
 <header>
   <h1>Select the Dish to add to the Chef</h1>
+  <a th:href="@{/dishes}">
+    <button type="button" style="margin-top: 10px;">Manage Dishes</button>
+  </a>
 </header>
 <section>
   <h2>Select dish:</h2>
-  <form action="/chefDetails" method="POST">
+  <form th:action="@{/dishes/add-to-chef}" method="post">
     <input type="hidden" name="chefId" th:value="${chef.id}" />
     <!-- Dynamically display radio buttons for each dish -->
     <div th:each="dish : ${dishes}">
