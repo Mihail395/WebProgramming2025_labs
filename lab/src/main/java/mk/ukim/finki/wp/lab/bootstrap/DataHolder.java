@@ -15,11 +15,11 @@ public class DataHolder {
 
     @PostConstruct
     public void init(){
-        chefs.add(new Chef(1L,"Gordon","Ramsay","gr",new ArrayList<>()));
-        chefs.add(new Chef(2L,"Jamie","Oliver","gr",new ArrayList<>()));
-        chefs.add(new Chef(3L,"Thomas","Keller","gr",new ArrayList<>()));
-        chefs.add(new Chef(4L,"David","Chang","gr",new ArrayList<>()));
-        chefs.add(new Chef(5L,"Mark","Mark","gr",new ArrayList<>()));
+        chefs.add(new Chef("Gordon","Ramsay","gr",new ArrayList<>()));
+        chefs.add(new Chef("Jamie","Oliver","gr",new ArrayList<>()));
+        chefs.add(new Chef("Thomas","Keller","gr",new ArrayList<>()));
+        chefs.add(new Chef("David","Chang","gr",new ArrayList<>()));
+        chefs.add(new Chef("Mark","Mark","gr",new ArrayList<>()));
 
         dishes.add(new Dish("steak","Steak","American",7));
         dishes.add(new Dish("pizza","Pizza","Italian",15));
