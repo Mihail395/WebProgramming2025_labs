@@ -47,7 +47,7 @@
     <input type="hidden" name="chefId" th:value="${chef.id}" />
     <!-- Dynamically display radio buttons for each dish -->
     <div th:each="dish : ${dishes}">
-      <input type="radio" name="dishId" th:value="${dish.dishId}" required>
+      <input type="radio" name="dishId" th:value="${dish.id}" required>
       <span th:text="${dish.name}"></span>
     </div>
     <br/>

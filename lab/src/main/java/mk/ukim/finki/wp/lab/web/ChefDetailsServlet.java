@@ -33,17 +33,18 @@ public class ChefDetailsServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String chefIdParam = req.getParameter("chefId");
-        String dishId = req.getParameter("dishId");
+        String dishIdParam = req.getParameter("dishId");
 
-        if (chefIdParam == null || dishId == null) {
+        if (chefIdParam == null || dishIdParam == null) {
             resp.sendRedirect("/listChefs");
             return;
         }
 
         Long chefId = Long.parseLong(chefIdParam);
+        Long dishId = Long.parseLong(dishIdParam);
 
         Chef chef = chefService.findById(chefId);
-        Dish dish = dishService.findByDishId(dishId);
+        Dish dish = dishService.findById(dishId);
 
         if (chef == null || dish == null) {
             resp.sendRedirect("/listChefs");

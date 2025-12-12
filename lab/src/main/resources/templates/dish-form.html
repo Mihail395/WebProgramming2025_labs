@@ -35,7 +35,6 @@
 
 <!-- Edit Dish Form -->
 <form th:if="${dish != null}" th:action="@{'/dishes/edit/' + ${dish.id}}" method="post">
-  <input type="text" name="dishId" th:value="${dish.dishId}" placeholder="Dish ID" required />
   <input type="text" name="name" th:value="${dish.name}" placeholder="Dish Name" required />
   <input type="text" name="cuisine" th:value="${dish.cuisine}" placeholder="Cuisine" required />
   <input type="number" name="preparationTime" th:value="${dish.preparationTime}" placeholder="Preparation Time" required />
@@ -44,7 +43,6 @@
 
 <!-- Add Dish Form -->
 <form th:unless="${dish != null}" th:action="@{/dishes/add}" method="post">
-  <input type="text" name="dishId" placeholder="Dish ID" required />
   <input type="text" name="name" placeholder="Dish Name" required />
   <input type="text" name="cuisine" placeholder="Cuisine" required />
   <input type="number" name="preparationTime" placeholder="Preparation Time" required />

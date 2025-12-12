@@ -1,23 +1,26 @@
 package mk.ukim.finki.wp.lab.model;
 
-import lombok.AllArgsConstructor;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@Entity
 public class Dish {
-    private static long counter = 1L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String dishId;
+//    private String dishId;
     private String name;
     private String cuisine;
     private int preparationTime;
 
-    public Dish(String dishId, String name, String cuisine, int preparationTime) {
-        this.id = counter++;
-        this.dishId = dishId;
+    @ManyToOne
+    private Chef chef;
+
+    public Dish(String name, String cuisine, int preparationTime) {
         this.name = name;
         this.cuisine = cuisine;
         this.preparationTime = preparationTime;

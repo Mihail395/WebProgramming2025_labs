@@ -1,7 +1,7 @@
 package mk.ukim.finki.wp.lab.service.impl;
 
 import mk.ukim.finki.wp.lab.model.Dish;
-import mk.ukim.finki.wp.lab.repository.DishRepository;
+import mk.ukim.finki.wp.lab.repository.jpa.DishRepository;
 import mk.ukim.finki.wp.lab.service.DishService;
 import org.springframework.stereotype.Service;
 
@@ -20,10 +20,10 @@ public class DishServiceImpl implements DishService {
         return dishRepository.findAll();
     }
 
-    @Override
-    public Dish findByDishId(String dishId){
-        return dishRepository.findByDishId(dishId);
-    }
+//    @Override
+//    public Dish findByDishId(String dishId){
+//        return dishRepository.findById(dishId);
+//    }
 
     @Override
     public Dish findById(Long id){
@@ -31,17 +31,16 @@ public class DishServiceImpl implements DishService {
     }
 
     @Override
-    public Dish create(String dishId, String name, String cuisine, int preparationTime){
-        Dish dish = new Dish(dishId, name, cuisine, preparationTime);
+    public Dish create(String name, String cuisine, int preparationTime){
+        Dish dish = new Dish(name, cuisine, preparationTime);
         return dishRepository.save(dish);
     }
 
     @Override
-    public  Dish update(Long id, String dishId, String name, String cuisine, int preparationTime){
+    public  Dish update(Long id, String name, String cuisine, int preparationTime){
         Dish existing = findById(id);
         if(existing == null) return null;
 
-        existing.setDishId(dishId);
         existing.setName(name);
         existing.setCuisine(cuisine);
         existing.setPreparationTime(preparationTime);

@@ -2,8 +2,8 @@ package mk.ukim.finki.wp.lab.service.impl;
 
 import mk.ukim.finki.wp.lab.model.Chef;
 import mk.ukim.finki.wp.lab.model.Dish;
-import mk.ukim.finki.wp.lab.repository.ChefRepository;
-import mk.ukim.finki.wp.lab.repository.DishRepository;
+import mk.ukim.finki.wp.lab.repository.jpa.ChefRepository;
+import mk.ukim.finki.wp.lab.repository.jpa.DishRepository;
 import mk.ukim.finki.wp.lab.service.ChefService;
 import org.springframework.stereotype.Service;
 
@@ -34,19 +34,22 @@ public class ChefServiceImpl implements ChefService {
     }
 
     @Override
-    public Chef addDishToChef(Long chefId, String dishId){
-        if(chefId == null || chefId <= 0 || dishId == null || dishId.isEmpty()) {
+    public Chef addDishToChef(Long chefId, Long dishId){
+        if(chefId == null || chefId <= 0 || dishId == null || dishId <= 0) {
             throw new IllegalArgumentException("chefId and dishId is null or empty");
         }
         Chef chef = chefRepository.findById(chefId).orElse(null);
         if(chef == null) {
             throw new IllegalArgumentException("chefId not found");
         }
-        Dish dish = dishRepository.findByDishId(dishId);
+        Dish dish = dishRepository.findById(dishId).orElse(null);
         if(dish == null) {
             throw new IllegalArgumentException("dish not found");
         }
+        dish.setChef(chef);
         chef.getDishes().add(dish);
+
+        dishRepository.save(dish);
         return chefRepository.save(chef);
     }
 }
