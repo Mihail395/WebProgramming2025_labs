@@ -8,4 +8,5 @@ public interface ChefRepository {
     List<Chef> findAll();
     Optional<Chef> findById(long id);
     Chef save(Chef chef);
+    void deleteById(Long id);
 }

@@ -7,6 +7,7 @@ import mk.ukim.finki.wp.lab.repository.jpa.DishRepository;
 import mk.ukim.finki.wp.lab.service.ChefService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -51,5 +52,37 @@ public class ChefServiceImpl implements ChefService {
 
         dishRepository.save(dish);
         return chefRepository.save(chef);
+    }
+
+    @Override
+    public Chef create (String firstName, String lastName, String bio){
+        if (firstName == null || firstName.isEmpty()
+                || lastName == null || lastName.isEmpty()
+                || bio == null || bio.isEmpty()) {
+            throw new IllegalArgumentException("invalid chef data");
+        }
+
+        Chef chef = new Chef(firstName,lastName,bio,new ArrayList<>());
+
+        return chefRepository.save(chef);
+    }
+
+    @Override
+    public Chef update(Long id, String firstName, String lastName, String bio){
+        Chef chef = chefRepository.findById(id).orElse(null);
+        if (chef == null) {
+            throw new IllegalArgumentException("chef not found");
+        }
+
+        chef.setFirstName(firstName);
+        chef.setLastName(lastName);
+        chef.setBio(bio);
+
+        return chefRepository.save(chef);
+    }
+
+    @Override
+    public void delete(Long id){
+        chefRepository.deleteById(id);
     }
 }
