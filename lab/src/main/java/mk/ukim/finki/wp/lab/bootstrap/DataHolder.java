@@ -3,6 +3,7 @@ package mk.ukim.finki.wp.lab.bootstrap;
 import jakarta.annotation.PostConstruct;
 import mk.ukim.finki.wp.lab.model.Chef;
 import mk.ukim.finki.wp.lab.model.Dish;
+import mk.ukim.finki.wp.lab.model.enums.Cuisine;
 import mk.ukim.finki.wp.lab.repository.jpa.DishRepository;
 import mk.ukim.finki.wp.lab.repository.jpa.ChefRepository;
 import org.springframework.stereotype.Component;
@@ -35,11 +36,11 @@ public class DataHolder {
         }
 
         if(dishRepository.findAll().isEmpty()) {
-            dishes.add(new Dish("Steak", "American", 7));
-            dishes.add(new Dish("Pizza", "Italian", 15));
-            dishes.add(new Dish("Pasta Carbonara", "Italian", 10));
-            dishes.add(new Dish("Burger", "American", 10));
-            dishes.add(new Dish("Chocolate Cake", "American", 20));
+            dishes.add(new Dish("Steak", Cuisine.AMERICAN, 7));
+            dishes.add(new Dish("Pizza", Cuisine.ITALIAN, 15));
+            dishes.add(new Dish("Pasta Carbonara", Cuisine.ITALIAN, 10));
+            dishes.add(new Dish("Burger", Cuisine.AMERICAN, 10));
+            dishes.add(new Dish("Chocolate Cake", Cuisine.AMERICAN, 20));
             dishRepository.saveAll(dishes);
         }
     }

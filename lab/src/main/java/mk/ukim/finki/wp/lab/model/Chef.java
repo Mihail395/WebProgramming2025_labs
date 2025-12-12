@@ -28,7 +28,12 @@ public class Chef {
         this.dishes = dishes;
     }
 
-    @OneToMany(mappedBy = "chef")
+    @ManyToMany
+    @JoinTable(
+            name = "chef_dishes",
+            joinColumns = @JoinColumn(name = "chef_id"),
+            inverseJoinColumns = @JoinColumn(name = "dish_id")
+    )
     private List<Dish> dishes = new ArrayList<>();
 
 }

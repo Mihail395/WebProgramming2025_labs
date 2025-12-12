@@ -2,6 +2,7 @@ package mk.ukim.finki.wp.lab.web.controller;
 
 import mk.ukim.finki.wp.lab.model.Chef;
 import mk.ukim.finki.wp.lab.model.Dish;
+import mk.ukim.finki.wp.lab.model.enums.Cuisine;
 import mk.ukim.finki.wp.lab.service.ChefService;
 import org.springframework.ui.Model;
 import mk.ukim.finki.wp.lab.service.DishService;
@@ -38,7 +39,7 @@ public class DishController {
     @PostMapping("/add")
     public String saveDish(
                            @RequestParam String name,
-                           @RequestParam String cuisine,
+                           @RequestParam Cuisine cuisine,
                            @RequestParam int preparationTime){
 
         dishService.create(name,cuisine,preparationTime);
@@ -59,7 +60,7 @@ public class DishController {
     @PostMapping("/edit/{id}")
     public String editDish(@PathVariable Long id,
                            @RequestParam String name,
-                           @RequestParam String cuisine,
+                           @RequestParam Cuisine cuisine,
                            @RequestParam int preparationTime) {
 
         dishService.update(id, name, cuisine, preparationTime);

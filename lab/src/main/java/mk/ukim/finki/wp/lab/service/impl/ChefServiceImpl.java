@@ -1,5 +1,6 @@
 package mk.ukim.finki.wp.lab.service.impl;
 
+import jakarta.transaction.Transactional;
 import mk.ukim.finki.wp.lab.model.Chef;
 import mk.ukim.finki.wp.lab.model.Dish;
 import mk.ukim.finki.wp.lab.repository.jpa.ChefRepository;
@@ -47,7 +48,7 @@ public class ChefServiceImpl implements ChefService {
         if(dish == null) {
             throw new IllegalArgumentException("dish not found");
         }
-        dish.setChef(chef);
+        dish.getChefs().add(chef);
         chef.getDishes().add(dish);
 
         dishRepository.save(dish);
@@ -82,7 +83,12 @@ public class ChefServiceImpl implements ChefService {
     }
 
     @Override
+    @Transactional
     public void delete(Long id){
+        Chef chef = chefRepository.findById(id).orElseThrow();
+        for (Dish dish : chef.getDishes()) {
+            dish.getChefs().remove(chef);
+        }
         chefRepository.deleteById(id);
     }
 }
