@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="utf-8">
     <title>Manage Chefs</title>
@@ -33,9 +34,11 @@
     <p th:if="${error}" th:text="${error}" style="color:red;"></p>
 
     <!-- Add New Chef Button -->
+    <div sec:authorize="hasRole('ADMIN')">
     <a th:href="@{/chefs/chef-form}" class="add-button">
         <button type="button">Add New Chef</button>
     </a>
+    </div>
 
     <!-- See Chef Details Button -->
     <form th:action="@{/chefs/view-details}" method="get" class="detail-button">
@@ -49,7 +52,7 @@
             <input type="radio" name="chefId" th:value="${chef.id}" required
                    th:onclick="'document.getElementById(\'selectedChefId\').value=' + ${chef.id}">
             <span th:text="'Name: ' + ${chef.firstName} + ' ' + ${chef.lastName} + ', Bio: ' + ${chef.bio}"></span>
-            <span class="actions">
+            <span class="actions" sec:authorize="hasRole('ADMIN')">
                 <a th:href="@{'/chefs/chef-form/' + ${chef.id}}">
                     <button type="button">Edit</button>
                 </a>
